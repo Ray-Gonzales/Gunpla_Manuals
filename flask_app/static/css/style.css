@@ -1,0 +1,280 @@
+*{
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+#container{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    position: relative;
+    height:100vh;
+    overflow:hidden;
+}
+
+#container::before{
+    content: "";
+    background-image:url("/static/images/runners.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.80;
+}
+
+a{
+    text-decoration: none
+}
+
+.reg_login{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.750);
+    color: antiquewhite;
+    padding: 30px;
+}
+
+.search_box{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position: relative;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.420);
+}
+
+.text{
+    color:goldenrod;
+    position: relative;
+    text-shadow: 2px 2px 2px black;
+    padding: 5px;
+}
+
+.text2{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    color:goldenrod;
+    position: relative;
+    text-shadow: 2px 2px 2px black;
+}
+
+.text3{
+    color:goldenrod;
+    position: relative;
+    text-shadow: 2px 2px 2px black;
+}
+
+.search{
+    width: 500px;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.button{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    width: 500px;
+}
+
+.button button{
+    background-color: black;
+    color: goldenrod;
+    border-radius: 5px;
+    padding: 3px 6px;
+}
+
+.membership{
+    position: relative;
+    display:flex;
+    justify-content: flex-end;
+    padding-top: 250px;
+    width: 900px;
+}
+
+.membership button{
+    margin-left: 10px;
+    padding: 0 5px;
+    background-color: black;
+    color: goldenrod;
+    border-radius: 5px;
+}
+
+.content_page{
+    margin-top: 30px;
+    display:flex;
+    justify-content: center;
+    height:100vh;
+}
+
+.content_box{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.420);
+    padding: 10px;
+}
+
+.content_box::before{
+    content: "";
+    background-image:url("/static/images/runners.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.40;
+}
+
+.content_text, .content_text3{
+    color:goldenrod;
+    position: relative;
+    text-shadow: 2px 2px 2px black;
+}
+
+.content_text2{
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    color:goldenrod;
+    position: relative;
+    text-shadow: 2px 2px 2px black;
+}
+
+.content_text2 p ,.content_text p{
+    margin: 0;
+}
+
+.content_search, .content_button{
+    width: 500px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content_membership{
+    position: relative;
+    display:flex;
+    justify-content: flex-end;
+    padding: 0 5px;
+}
+
+.content_membership button{
+    margin-left: 10px;
+    padding: 0 5px;
+    background-color: black;
+    color: goldenrod;
+    border-radius: 5px;
+}
+
+.content_page_button button{
+    padding: 3px 6px;
+    background-color: black;
+    color: goldenrod;
+    border-radius: 5px;
+    position: relative;
+}
+
+.upload{
+    margin-top: 100px;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    position: relative;
+}
+
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload_button {
+    background-color: black;
+    border: none;
+    color: gold;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    width: 150px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#fileList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#fileList li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+#fileList img {
+    margin-right: 8px;
+}
+
+.image{
+    height: 200px;
+    width: 150px;
+    margin: 10px;
+}
+
+.boxart{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 650px;
+    margin: 10px;
+}
+
+.instruction_page{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.instruction_manual{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    height: 65dvh;;
+    width: 95vh;
+    overflow:hidden;
+}
+
+.info{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+}
