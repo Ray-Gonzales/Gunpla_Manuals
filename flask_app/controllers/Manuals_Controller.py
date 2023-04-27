@@ -26,12 +26,13 @@ def search_library():
     manuals = Manuals.search(search_manual)
     return render_template("library.html", manuals=manuals)
 
-# Separate path for 
+# Separate page for exclusive
 @app.route("/exclusive_library")
 def exclusive_library():
     manuals = Manuals.get_all_info()
     return render_template("library_exclusive.html", manuals = manuals)
 
+# Instruction manual page
 @app.route("/instructions/<int:id>")
 def instructions(id):
     instructions = Manuals.get_one_kit(id)
@@ -67,22 +68,24 @@ app.config['COVER_ART_FOLDER'] = COVER_ART_FOLDER
 @app.route('/upload_file', methods=['POST'])
 def upload_file():
     file = request.files['ins_manual']
+    # checks if the file type is allowed
     if not allowed_file(file.filename):
         flash("Invalid file type. Only PDF files are allowed.")
         return redirect('/upload')
+    # checks if a file with the same name already exists in a specific folder
     filename = secure_filename(file.filename)
-    print(filename)
     if os.path.exists("/static/images/manual/" + filename):
         return redirect('/library')
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # converts pdf file to jpg and saves it to a folder
     file_basename = os.path.splitext(filename)[0]
-    print(file_basename)
     image_file = file_basename + '.jpg'
-    print(image_file)
     f_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    images = convert_from_path(f_path, fmt='jpeg', size=800)
+    images = convert_from_path(f_path, fmt='jpeg')
     images[0].save(os.path.join(COVER_ART_FOLDER, image_file))
+    # check if kit is exclusive
     exclusive = request.form.get('exclusive', False)
+    # create to database
     data = {
         'kit_name': request.form['kit_name'],
         'series': request.form['series'],
@@ -93,13 +96,35 @@ def upload_file():
         'user_id': session['user_id']
     }
     Manuals.create(data)
+    # render the correct page
     if exclusive:
         return redirect('/exclusive_library')
     else:
         return redirect('/library')
 
+@app.route('/edit_manual/<int:id>', methods=['GET', 'POST'])
+def edit_manual(id):
+    if 'user_id' not in session:
+        session.clear()
+        return redirect('/logout')
+    manual = Manuals.get_one_id(id)
+    if request.method == 'POST':
+        data = {
+            'id': id,
+            'kit_name': request.form['kit_name'],
+            'series': request.form['series'],
+            'release_year': request.form['release_year'],
+            'exclusive': request.form.get('exclusive', False)
+        }
+        Manuals.update(data)
+        flash("Manual updated successfully!")
+        return redirect(f'/edit_manual/{id}')
+    return render_template('edit_manual.html', manual=manual)
+
 @app.route('/delete_manual/<int:id>')
 def delete_manual(id):
+    if 'user_id' not in session:
+        session.clear()
+        return redirect('/logout')
     Manuals.delete(id)
     return redirect('/library')
-
