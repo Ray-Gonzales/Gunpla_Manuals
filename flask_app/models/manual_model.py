@@ -75,17 +75,39 @@ class Manuals:
             manual.user = Users(user_data)
             manual_list.append(manual)
         return manual_list
+    
+    @classmethod
+    def get_one_id(cls, id):
+        query  = "SELECT * FROM manuals JOIN users ON users.id = user_id WHERE manuals.id =  %(id)s;"
+        data = {'id':id}
+        results = connectToMySQL(cls.db).query_db(query, data)
+        pprint.pprint(results, sort_dicts=False)
+        if len(results) > 0:
+            row = results[0]
+            manual = cls(row)
+            user_data = {
+                "id" : row['id'],
+                "first_name" : row['first_name'],
+                "last_name" : row['last_name'],
+                "email" : row['email'],
+                "password" : row['password'],
+                "created_at" : row['created_at'],
+                "updated_at" : row['updated_at'],
+            }
+            manual.user = Users(user_data)
+            return manual
+        else:
+            return None
         
     @classmethod
     def update(cls, data ):
-        query = "UPDATE manuals SET kit_name = %(kit_name)s, series = %(series)s, release_year = %(release_year)s, ins_manual = %(ins_manual)s WHERE id = %(id)s;"
+        query = "UPDATE manuals SET kit_name = %(kit_name)s, series = %(series)s, release_year = %(release_year)s,  exclusive = %(exclusive)s WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db( query, data )
         
     @classmethod
     def delete(cls,id):
         query  = "DELETE FROM manuals WHERE id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query,{"id": id})
-    
     
     @staticmethod
     def validate_manual(gundam_manual):
