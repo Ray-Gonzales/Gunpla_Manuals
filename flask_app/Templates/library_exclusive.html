@@ -52,7 +52,7 @@
                     <h6>Instructions</h6>
                     <a href="/instructions/{{ manual.id }}"><img class="image" src="{{ url_for('static', filename='images/cover_art/' + manual.cover_art) }}" alt="gundam"></a>
                     {% if 'user_id' in session %}
-                    <a href="/delete_manual/{{ manual.id }}">Delete</a>
+                    <a class="text warning" href="/delete_manual/{{ manual.id }}">Delete</a>
                     {% endif %}
                 </div>
                 {% endif %}
